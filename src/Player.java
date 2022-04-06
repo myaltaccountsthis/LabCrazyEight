@@ -14,24 +14,37 @@ public class Player{
 
     // Adds a card to the player's hand
     public void addCard(Card c){
-        // your code here
+        hand.add(c);
     }
    
     // Covers all the logic regarding a human player's turn
     // public so it may be called by the Game class
     public Card playsTurn(Deck deck){
-        // your code here
+        // print player's hand
+        System.out.println("It is now your turn, your cards are " + hand);
+        // TODO modify this thing to include index
+
+        int nextPlayIndex = -1;
+
+        // TODO prob gonna check drawing cards in game
+
+
+        System.out.print("Enter index of card");
+        // TODO use scanner and get input
+        // TODO i will probably check if rank and suit are valid
+        // TODO also remember to ask for new suit if card played is 8
     }
 
     
     // Accessor for the players hand
     public ArrayList<Card> getHand(){
-        // your code here
+       return hand;
     }
 
     // Returns a printable string representing the player's hand
     public String handToString(){
-        // your code here
+        String str = hand.toString();
+        return "" + str;
     }
 
     // you will likely wish to have several more helper methods to simplify

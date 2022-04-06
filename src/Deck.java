@@ -46,6 +46,13 @@ public class Deck{
         return null;
     }
 
+    public Card[] getDeck(){
+        return deck;
+    }
+
+    public int getTop(){
+        return top;
+    }
 
     // returns true provided there is a card left in the deck to deal
     public boolean canDeal(){
@@ -63,7 +70,7 @@ public class Deck{
 
     // Returns a string representation of the whole deck
     public String toString(){
-       // your code here
+       return Arrays.toString(deck);
     }
 
     // you may wish to have more helper methods to simplify

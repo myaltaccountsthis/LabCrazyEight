@@ -24,6 +24,6 @@ public class Card{
 
     // Returns a human readable form of the card (eg. King of Diamonds)
     public String toString(){
-        // your code here
+        return Deck.getRankDisplayName(rank) + " of " + Deck.getSuitDisplayName(suit);
     }
 }
