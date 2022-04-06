@@ -8,6 +8,8 @@ public class Player{
 
     public Player(){
         // your code here
+        hand = new ArrayList<>();
+        input = new Scanner(System.in);
     }
 
     // Adds a card to the player's hand
