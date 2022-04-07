@@ -9,7 +9,7 @@ public class Deck{
 
     public static final char[] suits = {'h', 'd', 'c', 's'};
     private static final String[] suitNames = {"Hearts", "Diamonds", "Clubs", "Spades"};
-    private static final String[] rankNames = {"Ace", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
+    private static final String[] rankNames = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
             "Nine", "Ten", "Jack", "Queen", "King"};
 
     public static String getSuitDisplayName(char suit) {
@@ -70,7 +70,7 @@ public class Deck{
 
     // Returns a string representation of the whole deck
     public String toString(){
-       return Arrays.toString(deck);
+        return Arrays.toString(deck);
     }
 
     // you may wish to have more helper methods to simplify

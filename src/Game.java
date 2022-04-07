@@ -16,9 +16,13 @@ public class Game{
         cards = new Deck();
         input = new Scanner(System.in);
         p1 = new Player();
-        // TODO set up player hand
+        for (int i = 0; i < 7; i++) {
+            p1.getHand().add(cards.deal());
+        }
         compHand = new ArrayList<>();
-        // TODO set up compHand
+        for (int i = 0; i < 7; i++) {
+            compHand.add(cards.deal());
+        }
     }
 
     public boolean validNextPlay(Card c) {
@@ -28,11 +32,12 @@ public class Game{
     // Plays a game of crazy eights. 
     // Returns true to continue playing and false to stop playing
     public boolean play(){
-        String option;
-
+        System.out.println("Starting new game of Crazy Eights");
+        faceup = cards.deal();
+        System.out.println("First card is " + faceup);
         // loop should stop if player uses all cards, or deck is exhausted
         while (cards.canDeal()) {
-            // TODO do player turn
+            System.out.println("It is now your turn");
             // probably check if player has to draw here
             boolean canPlay = false;
             for (int i = 0; i < p1.getHand().size(); i++) {
@@ -41,33 +46,71 @@ public class Game{
                     break;
                 }
             }
-            // spam draw card if canPlay
-
-            Card c = p1.playsTurn(cards);
-            // p1.playsTurn() should return null if the deck is exhausted
-            if (c == null) {
-                break;
+            // spam draw card if not canPlay
+            if (!canPlay) {
+                System.out.println("You have no available moves, drawing cards");
+                int cardsDrawn = 0;
+                do {
+                    Card c = cards.deal();
+                    if (c == null)
+                        break;
+                    p1.addCard(c);
+                    canPlay = validNextPlay(c);
+                    cardsDrawn++;
+                } while (!canPlay);
+                System.out.println("You drew " + cardsDrawn + " cards");
+            }
+            // ask player which card to choose
+            Card c;
+            while (true) {
+                c = p1.playsTurn(cards);
+                canPlay = validNextPlay(c);
+                if (canPlay)
+                    break;
+                System.out.println("Your choice of " + c + " is invalid. Please try again");
+            }
+            if (c.getRank() == 8) {
+                // prompt user for new suit
+                System.out.print("Enter your desired suit: ");
+                String nextSuit;
+                while (true) {
+                    nextSuit = input.next();
+                    String suitName = Deck.getSuitDisplayName(nextSuit.charAt(0));
+                    if (!suitName.equals("Invalid Suit")) {
+                        currentSuit = nextSuit.charAt(0);
+                        break;
+                    }
+                    System.out.print("Invalid suit. Enter your desired suit: ");
+                }
+                System.out.println("You changed the suit to " + Deck.getSuitDisplayName(currentSuit));
+            }
+            else {
+                currentSuit = c.getSuit();
             }
             faceup = c;
+            p1.getHand().remove(faceup);
             System.out.println("You played " + c);
             if (p1.getHand().size() == 0)
                 break;
 
+            // computer turn
             c = computerTurn();
             // check if deck is out of cards
             if (c == null) {
                 break;
             }
             faceup = c;
-            System.out.println("Computer played " + c);
+            System.out.println("Computer played " + c + ", now has " + compHand.size() + " cards left");
             if (c.getRank() == 8) {
                 char choice = Deck.suits[(int) (Math.random() * 4)];
                 currentSuit = choice;
                 System.out.println("Computer changed suit to " + Deck.getSuitDisplayName(choice));
             }
+            else {
+                currentSuit = c.getSuit();
+            }
             if (compHand.size() == 0)
                 break;
-
         }
 
         // print winner, this block of code will print the correct message
@@ -88,8 +131,8 @@ public class Game{
                 System.out.println("You Won! You ran out of cards, and the computer had " + compSize + " cards left");
         }
 
-        System.out.print("Would you like to play another game? (y/n): ");
-        option = input.next();
+        System.out.print("Would you like to play another game? (⌐■_■) (y/n): ");
+        String option = input.next();
         return option.equalsIgnoreCase("y");
     }
 

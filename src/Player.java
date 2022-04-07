@@ -20,19 +20,24 @@ public class Player{
     // Covers all the logic regarding a human player's turn
     // public so it may be called by the Game class
     public Card playsTurn(Deck deck){
+        // this should repeat until any card inside of the hand is chosen
         // print player's hand
-        System.out.println("It is now your turn, your cards are " + hand);
-        // TODO modify this thing to include index
+        System.out.println("Your cards are " + hand);
 
-        int nextPlayIndex = -1;
-
-        // TODO prob gonna check drawing cards in game
-
-
-        System.out.print("Enter index of card");
-        // TODO use scanner and get input
-        // TODO i will probably check if rank and suit are valid
-        // TODO also remember to ask for new suit if card played is 8
+        int nextPlayIndex;
+        while (true) {
+            System.out.print("Enter the number of which card to choose: ");
+            while (true) {
+                nextPlayIndex = input.nextInt();
+                if (nextPlayIndex >= 1 && nextPlayIndex <= hand.size())
+                    break;
+                System.out.print("Invalid number. Enter the number of which card to choose: ");
+            }
+            Card c = hand.get(nextPlayIndex - 1);
+            System.out.print("You chose " + c + ". Confirm? (y/n): ");
+            if (input.next().equalsIgnoreCase("y"))
+                return c;
+        }
     }
 
     
