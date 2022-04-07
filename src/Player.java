@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player{
-    
+
     private ArrayList<Card> hand; // the player's hand
     private Scanner input;
 
@@ -16,7 +16,7 @@ public class Player{
     public void addCard(Card c){
         hand.add(c);
     }
-   
+
     // Covers all the logic regarding a human player's turn
     // public so it may be called by the Game class
     public Card playsTurn(Deck deck){
@@ -40,7 +40,7 @@ public class Player{
         }
     }
 
-    
+
     // Accessor for the players hand
     public ArrayList<Card> getHand(){
        return hand;
