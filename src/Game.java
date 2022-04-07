@@ -120,15 +120,15 @@ public class Game{
             if (p1Size < compSize)
                 System.out.println("You Won! You had " + p1Size + " cards left, while the computer had " + compSize);
             else if (p1Size > compSize)
-                System.out.println("You Lose! You had " + p1Size + " cards left, while the computer had " + compSize);
+                System.out.println("You Lose! HaHa, what a noob! You had " + p1Size + " cards left, while the computer had " + compSize);
             else
                 System.out.println("Draw: Both players had " + p1Size + " cards left");
         }
         else {
             if (compSize == 0)
-                System.out.println("You Lose! Computer ran out of cards, you had " + p1Size + " cards left");
+                System.out.println("You Lose! HaHa, what a noob! Computer ran out of cards, you had " + p1Size + " cards left");
             else
-                System.out.println("You Won! You ran out of cards, and the computer had " + compSize + " cards left");
+                System.out.println("Wow! You actually Won! Your an epic gamer now! ヾ(⌐■_■)ノ♪You ran out of cards, and the computer had " + compSize + " cards left");
         }
 
         System.out.print("Would you like to play another game? (⌐■_■) (y/n): ");
@@ -164,7 +164,7 @@ public class Game{
                 compHand.add(c);
                 cardsDrawn++;
             } while (!validNextPlay(c));
-            System.out.println("Computer drew " + cardsDrawn + " cards");
+            System.out.println("Computer drew " + cardsDrawn + " cards, but that doesn't mean the game is over...");
             // set the next play for computer to the most recent card drawn
             nextPlayIndex = compHand.size() - 1;
         }
